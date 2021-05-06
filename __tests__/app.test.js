@@ -1,15 +1,15 @@
 import app from '../lib/app.js';
 import supertest from 'supertest';
 import client from '../lib/client.js';
-import { execSync } from 'child_process';
+//import { execSync } from 'child_process';
 
 const request = supertest(app);
 
 describe.skip('API Routes', () => {
 
-  beforeAll(() => {
+  /*beforeAll(() => {
     execSync('npm run setup-db');
-  });
+  });*/
 
   afterAll(async () => {
     return client.end();
