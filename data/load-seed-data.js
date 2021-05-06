@@ -13,12 +13,11 @@ async function run() {
       books.map(book => {
         return client.query(`
           INSERT INTO books (isbn13, title, image, year)
-          VALUES ($1, $2, $3, $4, $5, $6);
+          VALUES ($1, $2, $3, $4);
         `,
         [book.isbn13, book.title, book.image, book.year]);
       })
     );
-    
 
     console.log('seed data load complete');
   }
