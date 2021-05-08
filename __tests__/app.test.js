@@ -5,13 +5,20 @@ import { execSync } from 'child_process';
 
 const request = supertest(app);
 
-describe.skip('API Routes', () => {
+describe('API Routes', () => {
 
-  /*beforeAll(() => {
-    execSync('npm run setup-db');
-  });*/
-  beforeAll(() => {
+  beforeAll(async () => {
     execSync('npm run recreate-tables');
+
+    /*const response = await request
+      .post('/api/auth/signup')
+      .send({
+        name: 'Me the User',
+        email: 'me@user.com',
+        password: 'password'
+      });
+
+    expect(response.status).toBe(200); */
   });
 
   afterAll(async () => {
@@ -60,27 +67,32 @@ describe.skip('API Routes', () => {
     }
   ];
 
-  // If a GET request is made to /api/books, does:
-  // 1) the server respond with status of 200
-  // 2) the body match the expected API data?
   it('GET /api/books', async () => {
-    // act - make the request
     const response = await request.get('/api/books');
 
-    // was response OK (200)?
     expect(response.status).toBe(200);
-
-    // did it return the data we expected?
     expect(response.body).toEqual(expected);
 
   });
 
-  // If a GET request is made to /api/books/:id, does:
-  // 1) the server respond with status of 200
-  // 2) the body match the expected API data for the cat with that id?
-  test('GET /api/books/:id', async () => {
+  it('GET /api/books/:id', async () => {
     const response = await request.get('/api/books/2');
+
     expect(response.status).toBe(200);
     expect(response.body).toEqual(expected[1]);
+  });
+
+  it('POST newBook to /api/books', async () => {
+    let newBook = {
+      id: expect.any(Number),
+      isbn13: '978-0745651903',
+      title: 'The Tyranny of Science',
+      image: 'https://images-na.ssl-images-amazon.com/images/I/41hk8+-IhCL._SX317_BO1,204,203,200_.jpg',
+      year: 2011
+    };
+
+    const response = await request.post('/api/books').send(newBook);
+
+    expect(response.status).toBe(200);
   });
 });
