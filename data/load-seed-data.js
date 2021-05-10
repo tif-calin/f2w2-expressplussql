@@ -12,10 +12,10 @@ async function run() {
     await Promise.all(
       books.map(book => {
         return client.query(`
-          INSERT INTO books (isbn13, title, image, year)
-          VALUES ($1, $2, $3, $4);
+          INSERT INTO books (isbn13, title, image, year, user_id)
+          VALUES ($1, $2, $3, $4, $5);
         `,
-        [book.isbn13, book.title, book.image, book.year]);
+        [book.isbn13, book.title, book.image, book.year, 0]);
       })
     );
 
