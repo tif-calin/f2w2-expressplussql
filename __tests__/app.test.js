@@ -197,7 +197,7 @@ describe('API Routes', () => {
     });
 
     // 2 post requsts and get all
-    it.skip('GET /api/books and POST /api/books/:id', async () => {
+    it('GET /api/books and POST /api/books/:id', async () => {
       execSync('npm run setup-db');
       const book1 = (await request.post('/api/books').send(newBook)).body;
       const book2 = (await request.post('/api/books').send(newBook2)).body;
@@ -209,7 +209,7 @@ describe('API Routes', () => {
     });
 
     // delete a book
-    it.skip('DELETE /api/books/:id', async () => {
+    it('DELETE /api/books/:id', async () => {
       execSync('npm run setup-db');
       await request.delete(`/api/books/${expected.length}`);
 
@@ -220,7 +220,7 @@ describe('API Routes', () => {
     });
 
     // get by name
-    it.skip('GET /api/books/name/:name', async () => {
+    it('GET /api/books/name/:name', async () => {
       execSync('npm run setup-db');
       const response = await request.get('/api/books/name/Reyita');
 
