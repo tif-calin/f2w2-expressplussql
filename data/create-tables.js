@@ -9,13 +9,20 @@ async function run() {
   try {
 
     // run a query to create tables
-    await client.query(`          
+    await client.query(`  
+      CREATE TABLE users (
+        id SERIAL PRIMARY KEY NOT NULL,
+        name VARCHAR(512) NOT NULL,
+        email VARCHAR(512) NOT NULL,
+        password VARCHAR(512) NOT NULL
+      );       
       CREATE TABLE books (
         id SERIAL PRIMARY KEY NOT NULL,
         isbn13 VARCHAR(512) NOT NULL,
         title VARCHAR(512) NOT NULL,
         image VARCHAR(512) NOT NULL,
-        year INTEGER NOT NULL
+        year INTEGER NOT NULL,
+        user_id INTEGER NOT NULL REFERENCES users(id)
       );
     `);
 
