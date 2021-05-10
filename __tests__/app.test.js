@@ -2,7 +2,7 @@ import app from '../lib/app.js';
 import supertest from 'supertest';
 import client from '../lib/client.js';
 import { execSync } from 'child_process';
-import { describe, expect, test, it, beforeAll } from '@jest/globals';
+import { describe, expect, it, beforeAll } from '@jest/globals';
 
 const request = supertest(app);
 
@@ -176,7 +176,8 @@ describe('API Routes', () => {
     });
 
     // post a new book
-    it.skip('POST /api/books', async () => {
+    it('POST /api/books', async () => {
+      newBook.userId = user.id;
       const response = await request.post('/api/books').send(newBook);
 
       expect(response.status).toBe(200);
@@ -184,7 +185,8 @@ describe('API Routes', () => {
     });
 
     // update the new book
-    it.skip('PUT /api/books/:id', async () => {
+    it('PUT /api/books/:id', async () => {
+      newBook2.userId = user.id;
       const book = (await request.post('/api/books').send(newBook2)).body;
       book.year = 9999;
 
