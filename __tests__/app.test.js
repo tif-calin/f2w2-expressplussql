@@ -67,7 +67,7 @@ describe('API Routes', () => {
     }
   ];
 
-  let newBook = {
+  const newBook = {
     id: expect.any(Number),
     isbn13: '978-0745651903',
     title: 'The Tyranny of Science',
@@ -75,15 +75,16 @@ describe('API Routes', () => {
     year: 2011
   };
 
-  let newBook2 = {
+  const newBook2 = {
     id: expect.any(Number),
-    isbn13: '978-1603582865',
-    title: 'The Art of Fermentation',
-    image: 'https://images-na.ssl-images-amazon.com/images/I/516rS4uOlDL._SX383_BO1,204,203,200_.jpg',
-    year: 2012
+    isbn13: '978-1931498234',
+    title: 'Wild Fermentation',
+    image: 'https://images-na.ssl-images-amazon.com/images/I/51BbudCTzCL._SX348_BO1,204,203,200_.jpg',
+    year: 2003
   };
 
-  it('GET     /api/books', async () => {
+  // get list of books
+  it('GET /api/books', async () => {
     const response = await request.get('/api/books');
 
     expect(response.status).toBe(200);
@@ -91,17 +92,35 @@ describe('API Routes', () => {
 
   });
 
-  it('GET     /api/books/:id', async () => {
+  // get a specific book by id
+  it('GET /api/books/:id', async () => {
     const response = await request.get('/api/books/2');
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual(expected[1]);
   });
 
-  it('POST    /api/books', async () => {
-
+  // post a new book
+  it('POST /api/books', async () => {
     const response = await request.post('/api/books').send(newBook);
 
     expect(response.status).toBe(200);
+    expect(response.body).toEqual(newBook);
+  });
+
+  // update the new book
+  it('PUT /api/books/:id', async () => {
+    const book = (await request.post('/api/books').send(newBook2)).body;
+    book.year = 9999;
+
+    const response = await request.put(`/api/books/${book.id}`).send(book);
+
+    expect(response.status).toBe(200);
+    expect(response.body.year).toEqual(9999);
+  });
+
+  // 2 post requsts and get all
+  it('GET /api/books and POST /api/books/:id', async () => {
+    const book1 = await request.post('/api/books').send(newBook);
   });
 });
