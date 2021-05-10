@@ -1,6 +1,5 @@
 const books = [
   {
-    id: 1,
     title: 'Chaos of Disciplines',
     subtitle: '',
     authors: ['Andrew Abbott'],
@@ -16,7 +15,6 @@ const books = [
     tags: ['sociology', 'social sciences']
   },
   {
-    id: 2,
     title: 'Reyita',
     subtitle: 'The Life of a Black Cuban Woman in the Twentieth Century',
     authors: ['María de los Reyes Castillo Bueno', 'Daisy Rubiera Castillo', 'Anne McLean'],
@@ -32,7 +30,6 @@ const books = [
     tags: ['latin american history', 'history of cuba', 'historical latin american biographies']
   },
   {
-    id: 3,
     title: 'Fearing the Black Body',
     subtitle: 'The Racial Origins of Fat Phobia',
     authors: ['Sabrina Strings'],
@@ -48,7 +45,6 @@ const books = [
     tags: ['sociological study of medicine', 'ethnic demographic studies', 'discrimination & racism']
   },
   {
-    id: 4,
     title: 'The Trouble with Testosterone',
     subtitle: 'And Other Essays on the Biology of the Human Predicament',
     authors: ['Robert Sapolsky'],
@@ -64,7 +60,6 @@ const books = [
     tags: ['science essays & commentary', 'anatomy', 'essays']
   },
   {
-    id: 5,
     title: 'Dark Emu',
     subtitle: 'Black Seeds: Agriculture or Accident?',
     authors: ['Bruce Pascoe'],
@@ -81,7 +76,6 @@ const books = [
     tags: ['australia & new zealand history', 'environmentalist & naturalist biographies', 'food science']
   },
   {
-    id: 6,
     title: 'Debt',
     subtitle: 'The First 5,000 Years',
     authors: ['David Graeber'],
@@ -98,7 +92,6 @@ const books = [
     tags: ['credit ratings & repair', 'theory of economics', 'economic history']
   },
   {
-    id: 7,
     title: 'The Mushroom at the End of the World',
     subtitle: 'On the Possibility of Life in Capitalist Ruins',
     authors: ['Anna Lowenhaupt Tsing'],
@@ -114,7 +107,6 @@ const books = [
     tags: ['food science', 'environmentalist economics', 'cultural anthropology']
   },
   {
-    id: 8,
     title: 'The Master Algorithm',
     subtitle: 'How the Quest for the Ultimate Learning Machine Will Remake Our World',
     authors: ['Pedro Domingos'],
@@ -131,7 +123,6 @@ const books = [
     tags: ['computer programming logic', 'artificial intelligence expert systems', 'business development']
   },
   {
-    id: 9,
     title: 'The Spell of the Sensuous',
     subtitle: 'Perception and Language in a More-Than-Human World',
     authors: ['David Abram'],
@@ -148,7 +139,6 @@ const books = [
     tags: ['existentialist philosophy', 'humanist philosophy', 'linguistics reference']
   },
   {
-    id: 10,
     title: 'The Hidden Life of Trees',
     subtitle: 'What They Feel, How They Communicate – Discoveries from a Secret World',
     authors: ['Peter Wohlleben'],
@@ -164,7 +154,6 @@ const books = [
     tags: ['plant & animal photography', 'trees in biological sciences', 'nature writing & essays']
   },
   {
-    id: 11,
     title: 'The Unsettling of America',
     subtitle: 'Culture & Agriculture',
     authors: ['Wendell Berry'],
@@ -180,7 +169,6 @@ const books = [
     tags: ['agricultural science history', 'agriculture', 'nature writing & essays']
   },
   {
-    id: 12,
     title: 'PiHKAL',
     subtitle: 'A Chemical Love Story',
     authors: ['Alexander Shulgin', 'Ann Shulgin'],
@@ -198,7 +186,6 @@ const books = [
     tags: ['industrial & technical chemistry', 'general chemistry', 'drug dependency recovery']
   },
   {
-    id: 13,
     title: 'TiHKAL',
     subtitle: 'The Continuation',
     authors: ['Alexander Shulgin', 'Ann Shulgin'],
