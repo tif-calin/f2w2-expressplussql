@@ -132,5 +132,25 @@ describe('API Routes', () => {
       expect(response.status).toBe(200);
       expect(response.body).toEqual([...expected, book1, book2]);
     });
+
+    // delete a book
+    it('DELETE /api/books/:id', async () => {
+      execSync('npm run setup-db');
+      await request.delete(`/api/books/${expected.length}`);
+
+      const response = await request.get('/api/books');
+
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(expect.arrayContaining(expected.slice(0, -1)));
+    });
+
+    // get by name
+    it('GET /api/books/name/:name', async () => {
+      execSync('npm run setup-db');
+      const response = await request.get('/api/books/name/Reyita');
+
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(expected[1]);
+    });
   });
 });
