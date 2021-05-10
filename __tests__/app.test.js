@@ -7,24 +7,6 @@ const request = supertest(app);
 
 describe('API Routes', () => {
 
-  beforeAll(async () => {
-    execSync('npm run setup-db');
-
-    /*const response = await request
-      .post('/api/auth/signup')
-      .send({
-        name: 'Me the User',
-        email: 'me@user.com',
-        password: 'password'
-      });
-
-    expect(response.status).toBe(200); */
-  });
-
-  afterAll(async () => {
-    return client.end();
-  });
-
   const expected = [
     { 'id':expect.any(Number), 'isbn13':'978-0226001012', 'title':'Chaos of Disciplines', 
       'image':'https://images-na.ssl-images-amazon.com/images/I/51FYOr6-voL._SX323_BO1,204,203,200_.jpg', 'year':2001 
@@ -83,44 +65,72 @@ describe('API Routes', () => {
     year: 2003
   };
 
-  // get list of books
-  it('GET /api/books', async () => {
-    const response = await request.get('/api/books');
+  describe('/api/books', () => {
 
-    expect(response.status).toBe(200);
-    expect(response.body).toEqual(expected);
+    afterAll(async () => {
+      return client.end();
+    });
 
-  });
+    beforeAll(async () => {
+      execSync('npm run setup-db');
+  
+      /*const response = await request
+        .post('/api/auth/signup')
+        .send({
+          name: 'Me the User',
+          email: 'me@user.com',
+          password: 'password'
+        });
+  
+      expect(response.status).toBe(200); */
+    });
 
-  // get a specific book by id
-  it('GET /api/books/:id', async () => {
-    const response = await request.get('/api/books/2');
+    // get list of books
+    it('GET /api/books', async () => {
+      const response = await request.get('/api/books');
 
-    expect(response.status).toBe(200);
-    expect(response.body).toEqual(expected[1]);
-  });
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(expected);
 
-  // post a new book
-  it('POST /api/books', async () => {
-    const response = await request.post('/api/books').send(newBook);
+    });
 
-    expect(response.status).toBe(200);
-    expect(response.body).toEqual(newBook);
-  });
+    // get a specific book by id
+    it('GET /api/books/:id', async () => {
+      const response = await request.get('/api/books/2');
 
-  // update the new book
-  it('PUT /api/books/:id', async () => {
-    const book = (await request.post('/api/books').send(newBook2)).body;
-    book.year = 9999;
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(expected[1]);
+    });
 
-    const response = await request.put(`/api/books/${book.id}`).send(book);
+    // post a new book
+    it('POST /api/books', async () => {
+      const response = await request.post('/api/books').send(newBook);
 
-    expect(response.status).toBe(200);
-    expect(response.body.year).toEqual(9999);
-  });
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(newBook);
+    });
 
-  // 2 post requsts and get all
-  it('GET /api/books and POST /api/books/:id', async () => {
-    const book1 = await request.post('/api/books').send(newBook);
+    // update the new book
+    it('PUT /api/books/:id', async () => {
+      const book = (await request.post('/api/books').send(newBook2)).body;
+      book.year = 9999;
+
+      const response = await request.put(`/api/books/${book.id}`).send(book);
+
+      expect(response.status).toBe(200);
+      expect(response.body.year).toEqual(9999);
+    });
+
+    // 2 post requsts and get all
+    it('GET /api/books and POST /api/books/:id', async () => {
+      execSync('npm run setup-db');
+      const book1 = (await request.post('/api/books').send(newBook)).body;
+      const book2 = (await request.post('/api/books').send(newBook2)).body;
+
+      const response = await request.get('/api/books');
+
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual([...expected, book1, book2]);
+    });
   });
 });
