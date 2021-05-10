@@ -8,7 +8,7 @@ const request = supertest(app);
 describe('API Routes', () => {
 
   beforeAll(async () => {
-    execSync('npm run recreate-tables');
+    execSync('npm run setup-db');
 
     /*const response = await request
       .post('/api/auth/signup')
@@ -67,7 +67,23 @@ describe('API Routes', () => {
     }
   ];
 
-  it('GET /api/books', async () => {
+  let newBook = {
+    id: expect.any(Number),
+    isbn13: '978-0745651903',
+    title: 'The Tyranny of Science',
+    image: 'https://images-na.ssl-images-amazon.com/images/I/41hk8+-IhCL._SX317_BO1,204,203,200_.jpg',
+    year: 2011
+  };
+
+  let newBook2 = {
+    id: expect.any(Number),
+    isbn13: '978-1603582865',
+    title: 'The Art of Fermentation',
+    image: 'https://images-na.ssl-images-amazon.com/images/I/516rS4uOlDL._SX383_BO1,204,203,200_.jpg',
+    year: 2012
+  };
+
+  it('GET     /api/books', async () => {
     const response = await request.get('/api/books');
 
     expect(response.status).toBe(200);
@@ -75,21 +91,14 @@ describe('API Routes', () => {
 
   });
 
-  it('GET /api/books/:id', async () => {
+  it('GET     /api/books/:id', async () => {
     const response = await request.get('/api/books/2');
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual(expected[1]);
   });
 
-  it('POST newBook to /api/books', async () => {
-    let newBook = {
-      id: expect.any(Number),
-      isbn13: '978-0745651903',
-      title: 'The Tyranny of Science',
-      image: 'https://images-na.ssl-images-amazon.com/images/I/41hk8+-IhCL._SX317_BO1,204,203,200_.jpg',
-      year: 2011
-    };
+  it('POST    /api/books', async () => {
 
     const response = await request.post('/api/books').send(newBook);
 
