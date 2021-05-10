@@ -9,6 +9,7 @@ async function run() {
     
     await client.query(`
       DROP TABLE IF EXISTS books;
+      DROP TABLE IF EXISTS users CASCADE;
     `);
 
     console.log('drop tables complete');
